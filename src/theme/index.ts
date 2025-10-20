@@ -1,0 +1,56 @@
+export default {
+  colors: {
+    white: '#FFFFFF',
+    primary_black: '#1b1d1f',
+    primary_red: '#F23D3C',
+    primary_off_white: '#FCF6F1',
+
+    red01: '#C72C2B',
+    red02: '#F27A79',
+    red03: '#F2B6B5',
+    red04: '#F2D6D5',
+
+    blue01: '#B0CCD9',
+    blue02: '#D3E2EA',
+    blue03: '#E2ECF2',
+
+    success: '#839E20',
+    alert: '#E67425',
+    error: '#e03131',
+
+    gray02: '#4C4C56',
+    gray03: '#686873',
+    gray04: '#8A8A99',
+    gray05: '#C7C7D2',
+    gray06: '#EDEFF3',
+    neutral: '#F6F6F6',
+
+    gold_yellow: '#E5C767',
+    purplish_blue: '#4762B4',
+    pink: '#FF97AF',
+    pinkish_purple: '#AE729E',
+    green: '#6D7B3B',
+  },
+  fonts: {
+    REGULAR: 'Raleway_400Regular',
+    REGULAR_ITALIC: 'Raleway_400Regular_Italic',
+    MEDIUM: 'Raleway_500Medium',
+    SEMI_BOLD: 'Raleway_600SemiBold',
+    BOLD: 'Raleway_700Bold',
+    UNBOUNDED_REGULAR: 'Roboto_400Regular',
+    UNBOUNDED_SEMI_BOLD: 'Roboto_500Medium',
+    UNBOUNDED_BOLD: 'Roboto_700Bold',
+  },
+  fontSizes: {
+    XXS: 10,
+    XS: 12,
+    SM: 14,
+    MD: 16,
+    LG: 18,
+    LG2: 20,
+    XL: 24,
+    XL2: 28,
+    XXL: 32,
+    XXX: 36,
+  },
+};

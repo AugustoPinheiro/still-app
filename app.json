@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "still",
+    "scheme": "br.com.stillapp",
+    "slug": "finti",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "splash": {
+      "image": "./src/assets/images/logo-post.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FFF"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a72a3416-d05a-4cd6-b100-1f9f75002486"
+      },
+      "oneSignalAppId": "0e4144a3-0a94-4281-80df-b6d9fba9a33c"
+    },
+    "owner": "augustopinheiro1",
+    "ios": {
+      "bundleIdentifier": "br.com.stillapp",
+      "newArchEnabled": false
+    },
+    "android": {
+      "package": "br.com.stillapp"
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "newArchEnabled": false,
+            "useFabric": false
+          }
+        }
+      ],
+      "expo-font",
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development",
+          "iosNSE": false
+        }
+      ]
+    ]
+  }
+}

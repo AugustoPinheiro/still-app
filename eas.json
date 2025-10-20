@@ -1,0 +1,116 @@
+{
+  "cli": {
+    "version": ">= 3.14.0",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "base": {
+      "node": "20.11.0",
+      "yarn": "1.22.19",
+      "android": {
+        "image": "default",
+        "env": {
+          "PLATFORM": "android"
+        }
+      },
+      "ios": {
+        "image": "latest",
+        "env": {
+          "PLATFORM": "ios"
+        }
+      },
+      "channel": "base"
+    },
+    "production": {
+      "extends": "base",
+      "channel": "production",
+      "env": {
+        "EXPO_APPLE_TEAM_ID": "126629153",
+        "EXPO_ASC_KEY_ID": "6466493400",
+        "EXPO_PUBLIC_API_URL": "https://still.flukeoperadora.com.br",
+        "EXPO_PUBLIC_COMETCHAT_APP_ID": "243921e02b3e7fe7",
+        "EXPO_PUBLIC_COMETCHAT_REGION": "us",
+        "EXPO_PUBLIC_COMETCHAT_AUTH_KEY": "029d6fd547dcb07b2813ac81da93ef37a368e41b",
+        "EXPO_PUBLIC_IS_DEV": "false",
+        "EXPO_PUBLIC_XIMILAR_URL": "https://api.ximilar.com",
+        "EXPO_PUBLIC_XIMILAR_KEY": "b3a621d8ed739e381e7da5f399952ac204eea275",
+        "EXPO_PUBLIC_AMPLITUDE_API_KEY": "74b0c0389f8e6f0d8315c36c80064ad2"
+      }
+    },
+    "development": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://still.flukeoperadora.com.br",
+        "EXPO_PUBLIC_COMETCHAT_APP_ID": "243921e02b3e7fe7",
+        "EXPO_PUBLIC_COMETCHAT_REGION": "us",
+        "EXPO_PUBLIC_COMETCHAT_AUTH_KEY": "029d6fd547dcb07b2813ac81da93ef37a368e41b",
+        "EXPO_PUBLIC_IS_DEV": "false",
+        "EXPO_PUBLIC_XIMILAR_URL": "https://api.ximilar.com",
+        "EXPO_PUBLIC_XIMILAR_KEY": "b3a621d8ed739e381e7da5f399952ac204eea275",
+        "EXPO_PUBLIC_AMPLITUDE_API_KEY": "74b0c0389f8e6f0d8315c36c80064ad2"
+      }
+    },
+    "development-simulator": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      },
+      "channel": "development-simulator",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://still.flukeoperadora.com.br",
+        "EXPO_PUBLIC_COMETCHAT_APP_ID": "243921e02b3e7fe7",
+        "EXPO_PUBLIC_COMETCHAT_REGION": "us",
+        "EXPO_PUBLIC_COMETCHAT_AUTH_KEY": "029d6fd547dcb07b2813ac81da93ef37a368e41b",
+        "EXPO_PUBLIC_IS_DEV": "false",
+        "EXPO_PUBLIC_XIMILAR_URL": "https://api.ximilar.com",
+        "EXPO_PUBLIC_XIMILAR_KEY": "b3a621d8ed739e381e7da5f399952ac204eea275",
+        "EXPO_PUBLIC_AMPLITUDE_API_KEY": "74b0c0389f8e6f0d8315c36c80064ad2"
+      }
+    },
+    "preview-aab": {
+      "extends": "base",
+      "distribution": "internal",
+      "channel": "preview",
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_APPLE_TEAM_ID": "126629153",
+        "EXPO_ASC_KEY_ID": "6466493400",
+        "EXPO_PUBLIC_API_URL": "https://still.flukeoperadora.com.br",
+        "EXPO_PUBLIC_COMETCHAT_APP_ID": "243921e02b3e7fe7",
+        "EXPO_PUBLIC_COMETCHAT_REGION": "us",
+        "EXPO_PUBLIC_COMETCHAT_AUTH_KEY": "029d6fd547dcb07b2813ac81da93ef37a368e41b",
+        "EXPO_PUBLIC_IS_DEV": "false",
+        "EXPO_PUBLIC_XIMILAR_URL": "https://api.ximilar.com",
+        "EXPO_PUBLIC_XIMILAR_KEY": "b3a621d8ed739e381e7da5f399952ac204eea275",
+        "EXPO_PUBLIC_AMPLITUDE_API_KEY": "74b0c0389f8e6f0d8315c36c80064ad2"
+      }
+    },
+    "preview": {
+      "extends": "base",
+      "distribution": "internal",
+      "channel": "preview",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_APPLE_TEAM_ID": "126629153",
+        "EXPO_ASC_KEY_ID": "6466493400",
+        "EXPO_PUBLIC_API_URL": "https://still.flukeoperadora.com.br",
+        "EXPO_PUBLIC_COMETCHAT_APP_ID": "243921e02b3e7fe7",
+        "EXPO_PUBLIC_COMETCHAT_REGION": "us",
+        "EXPO_PUBLIC_COMETCHAT_AUTH_KEY": "029d6fd547dcb07b2813ac81da93ef37a368e41b",
+        "EXPO_PUBLIC_IS_DEV": "false",
+        "EXPO_PUBLIC_XIMILAR_URL": "https://api.ximilar.com",
+        "EXPO_PUBLIC_XIMILAR_KEY": "b3a621d8ed739e381e7da5f399952ac204eea275",
+        "EXPO_PUBLIC_AMPLITUDE_API_KEY": "74b0c0389f8e6f0d8315c36c80064ad2"
+      }
+    }
+  }
+}

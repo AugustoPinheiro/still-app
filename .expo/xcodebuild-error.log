@@ -1,0 +1,2 @@
+2025-07-24 22:27:50.166 xcodebuild[34438:52728999] Writing error result bundle to /var/folders/l0/1fs640h91sl0hnfd2bvp_pk80000gn/T/ResultBundle_2025-24-07_22-27-0050.xcresult
+xcodebuild: error: The workspace named "Finti" does not contain a scheme named "Finti". The "-list" option can be used to find the names of the schemes in the workspace.

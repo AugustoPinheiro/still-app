@@ -1,0 +1,1 @@
+../../node_modules/react-native/scripts/xcode/with-environment.sh

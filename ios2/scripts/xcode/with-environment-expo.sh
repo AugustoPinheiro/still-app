@@ -1,0 +1,1 @@
+../../node_modules/expo/scripts/xcode/with-environment.sh
