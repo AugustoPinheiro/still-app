@@ -1,6 +1,0 @@
-Command line invocation:
-    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -workspace /Users/augustopinheiro/stil/still-app/ios/Finti.xcworkspace -configuration Debug -scheme Finti -destination id=7BA66B3B-0311-4342-8A8D-92785931BAA0
-
-User defaults from command line:
-    IDEPackageSupportUseBuiltinSCM = YES
-
