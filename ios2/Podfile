@@ -13,31 +13,7 @@ install! 'cocoapods',
 
 prepare_react_native_project!
 
-# If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
-# because `react-native-flipper` depends on (FlipperKit,...), which will be excluded. To fix this,
-# you can also exclude `react-native-flipper` in `react-native.config.js`
-#
-# ```js
-# module.exports = {
-#   dependencies: {
-#     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
-#   }
-# }
-# ```
-# flipper_config = FlipperConfiguration.disabled
-# if ENV['NO_FLIPPER'] == '1' then
-#   # Explicitly disabled through environment variables
-#   flipper_config = FlipperConfiguration.disabled
-# elsif podfile_properties.key?('ios.flipper') then
-#   # Configure Flipper in Podfile.properties.json
-#   # if podfile_properties['ios.flipper'] == 'true'  then
-#   #   flipper_config = FlipperConfiguration.enabled(["Debug", "Release"])
-#   # elsif podfile_properties['ios.flipper'] != 'false' then
-#   #   flipper_config = FlipperConfiguration.enabled(["Debug", "Release"], { 'Flipper' => podfile_properties['ios.flipper'] })
-#   # end
-# end
-
-target 'Finti' do
+target 'still' do
   use_expo_modules!
   config = use_native_modules!
 
@@ -49,9 +25,11 @@ target 'Finti' do
     :hermes_enabled => podfile_properties['expo.jsEngine'] == nil || podfile_properties['expo.jsEngine'] == 'hermes',
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/..",
-    # # Note that if you have use_frameworks! enabled, Flipper will not work if enabled
-    # :flipper_configuration => flipper_config
   )
+
+  target 'OneSignalNotificationServiceExtension' do
+    pod 'OneSignalXCFramework', '>= 5.0.0', '< 6.0'
+  end
 
   post_install do |installer|
     react_native_post_install(
@@ -79,9 +57,4 @@ target 'Finti' do
       Pod::UI.warn e
     end
   end
-end
-
-target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignalXCFramework', '>= 5.2.10', '< 6.0'
-  use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
 end

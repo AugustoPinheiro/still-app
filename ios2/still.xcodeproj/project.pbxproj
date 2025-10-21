@@ -511,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1.0;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L24WDCKU22;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -553,7 +553,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1.0;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L24WDCKU22;
 				INFOPLIST_FILE = still/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = stiil;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
