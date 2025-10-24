@@ -1,26 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { CometChat } from '@cometchat-pro/react-native-chat';
+import { CometChat } from "@cometchat-pro/react-native-chat";
 
-import { Loading } from '@/components/Loading';
-import { CometChatConversationListWithMessages } from '@/components/cometchat-pro-react-native-ui-kit/CometChatWorkspace/src';
-import { COMETCHAT_AUTH_KEY } from '@/config/cometChat';
-import { useToast } from '@/contexts/Toast.contexts';
-import { useChat } from '@/modules/Chat/contexts/chat.contexts';
-import { GenericPageProp } from '@/types/GenericPageProp';
+import { Loading } from "@/components/Loading";
+import { CometChatConversationListWithMessages } from "@/components/cometchat-pro-react-native-ui-kit/CometChatWorkspace/src";
+import { COMETCHAT_AUTH_KEY } from "@/config/cometChat";
+import { getProfile } from "@/config/mmkvStorage";
+import { useToast } from "@/contexts/Toast.contexts";
+import { useChat } from "@/modules/Chat/contexts/chat.contexts";
+import { GenericPageProp } from "@/types/GenericPageProp";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export function ChatHome({ navigation }: GenericPageProp) {
   const { setLocalUser, MOCK_UID, localUser } = useChat();
   const { show } = useToast();
   const [localLoading, setLocalLoading] = React.useState(true);
+  const profile = getProfile();
 
   async function login() {
     const loggedUser = await CometChat.getLoggedinUser();
 
     if (!loggedUser) {
-      const user = await CometChat.login(MOCK_UID, COMETCHAT_AUTH_KEY);
+      const user = await CometChat.login(
+        profile?.uuid ?? MOCK_UID,
+        COMETCHAT_AUTH_KEY
+      );
       setLocalUser(user);
     } else {
       setLocalUser(loggedUser);
@@ -33,8 +38,8 @@ export function ChatHome({ navigation }: GenericPageProp) {
       setLocalLoading(false);
     } catch (error) {
       show({
-        message: 'Erro ao carregar mensagens',
-        type: 'error',
+        message: "Erro ao carregar mensagens",
+        type: "error",
       });
 
       navigation.goBack();
@@ -63,7 +68,7 @@ export function ChatHome({ navigation }: GenericPageProp) {
     <S.Container>
       <S.TalkContainer>
         <S.TalkText>CONVERSAS</S.TalkText>
-        <S.TalkButton onPress={() => navigation.navigate('ChatUsers')}>
+        <S.TalkButton onPress={() => navigation.navigate("ChatUsers")}>
           <S.TalkIcon name="plus" />
         </S.TalkButton>
       </S.TalkContainer>
