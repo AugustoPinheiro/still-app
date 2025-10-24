@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "still",
-    "scheme": "br.com.stillapp",
-    "slug": "finti",
+    "name": "stiil",
+    "scheme": "stiil",
+    "slug": "stiil",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
     "splash": {
