@@ -65,7 +65,7 @@ export function NotificationsRow({ notification }: INotificationsProps) {
     }
   }
 
-  const fisrtProfile = notification?.people[0];
+  const firstProfile = notification?.people[0];
 
   function handlePressProfile(profile) {
     // @ts-expect-error
@@ -84,8 +84,8 @@ export function NotificationsRow({ notification }: INotificationsProps) {
         <S.InfoAndActionsContainer>
           <S.UserDataContainer>
             <S.Clickable
-              key={`${notification?.id}_${fisrtProfile?.username}`}
-              onPress={() => handlePressProfile(fisrtProfile?.username)}
+              key={`${notification?.id}_${firstProfile?.username}`}
+              onPress={() => handlePressProfile(firstProfile?.username)}
             >
               <S.UserPhoto source={{ uri: notification?.people[0]?.avatar }} cachePolicy="disk" />
             </S.Clickable>
