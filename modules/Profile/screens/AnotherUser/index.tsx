@@ -122,8 +122,8 @@ export function AnotherUser() {
         <S.Content>
           <S.Header>
             <S.HeaderButtonLeft></S.HeaderButtonLeft>
-            
-            {/* Test Button */}
+
+            {/* Test Button
             <TouchableOpacity
               style={{
                 width: 60,
@@ -140,9 +140,9 @@ export function AnotherUser() {
               }}
             >
               <Text style={{ color: 'white', fontSize: 12 }}>TEST</Text>
-            </TouchableOpacity>
-            
-            <S.HeaderPhoto 
+            </TouchableOpacity> */}
+
+            <S.HeaderPhoto
               activeOpacity={0.7}
               onPress={() => {
                 console.log('=== HEADER PHOTO PRESSED ===');
@@ -157,9 +157,9 @@ export function AnotherUser() {
                 }
               }}
             >
-              <S.HeaderPhotoContent 
-                source={{ uri: userData?.avatar }} 
-                cachePolicy="disk" 
+              <S.HeaderPhotoContent
+                source={{ uri: userData?.avatar }}
+                cachePolicy="disk"
               />
             </S.HeaderPhoto>
             <S.HeaderButtonRight onPress={handleOpenMenu}>
