@@ -1,29 +1,35 @@
-import React, { useEffect } from 'react';
-import { ActivityIndicator, RefreshControl, SectionList } from 'react-native';
+import React, { useEffect } from "react";
+import { ActivityIndicator, RefreshControl, SectionList } from "react-native";
 
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { isToday, isAfter, subDays } from 'date-fns';
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { isToday, isAfter, subDays } from "date-fns";
 
-import { Loading } from '@/components/Loading';
-import { NotificationsRow } from '@/modules/Social/components/NotificationsRow';
-import { useSocial } from '@/modules/Social/contexts/social.contexts';
+import { Loading } from "@/components/Loading";
+import { NotificationsRow } from "@/modules/Social/components/NotificationsRow";
+import { useSocial } from "@/modules/Social/contexts/social.contexts";
 import {
   getSocialNotifications,
   readNotifications,
-} from '@/modules/Social/services/social.services';
+} from "@/modules/Social/services/social.services";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export function Notifications() {
   const navigation = useNavigation<any>();
   const { followRequests, refetchFollowRequests } = useSocial();
-  const { data, isLoading, isFetchingNextPage, hasNextPage, refetch, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['notifications'],
-      queryFn: getSocialNotifications,
-      getNextPageParam: (lastPage) => lastPage?.meta?.cursor,
-    });
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    refetch,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["notifications"],
+    queryFn: getSocialNotifications,
+    getNextPageParam: (lastPage) => lastPage?.meta?.cursor,
+  });
 
   const notifications = React.useMemo(
     () => data?.pages?.flatMap((page) => page?.result ?? []) ?? [],
@@ -75,7 +81,7 @@ export function Notifications() {
 
       if (today?.length) {
         section.push({
-          title: 'Hoje',
+          title: "Hoje",
           data: today,
           renderItem: ({ item }) => <NotificationsRow notification={item} />,
           keyExtractor: (item, index) => `${item.id}_${index}`,
@@ -84,7 +90,7 @@ export function Notifications() {
 
       if (thisWeek?.length) {
         section.push({
-          title: 'Essa semana',
+          title: "Essa semana",
           data: thisWeek,
           renderItem: ({ item }) => <NotificationsRow notification={item} />,
           keyExtractor: (item, index) => `${item.id}_${index}`,
@@ -93,7 +99,7 @@ export function Notifications() {
 
       if (olds?.length) {
         section.push({
-          title: 'Anteriormente',
+          title: "Anteriormente",
           data: olds,
           renderItem: ({ item }) => <NotificationsRow notification={item} />,
           keyExtractor: (item, index) => `${item.id}_${index}`,
@@ -122,13 +128,20 @@ export function Notifications() {
     }
 
     return (
-      <S.FollowRequestContainer onPress={() => navigation.navigate('FollowRequests')}>
+      <S.FollowRequestContainer
+        onPress={() => navigation.navigate("FollowRequests")}
+      >
         <S.RowContainer>
           <>
-            <S.UserPhoto source={{ uri: followRequests[0]?.avatar }} cachePolicy="disk" />
+            <S.UserPhoto
+              source={{ uri: followRequests[0]?.avatar }}
+              cachePolicy="disk"
+            />
             <S.TextContainer>
               <S.FollowNameText>Solicitações para seguir</S.FollowNameText>
-              <S.FollowDescription>{getFollowRequestsText()}</S.FollowDescription>
+              <S.FollowDescription>
+                {getFollowRequestsText()}
+              </S.FollowDescription>
             </S.TextContainer>
           </>
           <S.Icon name="chevron-right" />
@@ -150,10 +163,14 @@ export function Notifications() {
       ) : (
         <S.Content>
           <SectionList
-            renderSectionHeader={({ section: { title } }) => <S.Description>{title}</S.Description>}
+            renderSectionHeader={({ section: { title } }) => (
+              <S.Description>{title}</S.Description>
+            )}
             initialNumToRender={20}
             sections={(sectionData ?? []) as any}
-            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetchAll} />}
+            refreshControl={
+              <RefreshControl refreshing={isLoading} onRefresh={refetchAll} />
+            }
             onEndReached={async () => {
               if (hasNextPage && !isFetchingNextPage && !isLoading) {
                 await fetchNextPage();
@@ -163,7 +180,11 @@ export function Notifications() {
             ListHeaderComponent={renderFollowRequests}
             ListFooterComponent={() =>
               isFetchingNextPage ? (
-                <ActivityIndicator size="small" color="#000" style={{ marginBottom: 8 }} />
+                <ActivityIndicator
+                  size="small"
+                  color="#000"
+                  style={{ marginBottom: 8 }}
+                />
               ) : (
                 <></>
               )

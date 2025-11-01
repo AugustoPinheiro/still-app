@@ -1,14 +1,15 @@
-import React from 'react';
-import { Linking } from 'react-native';
+import React from "react";
+import { Linking } from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import { formatDistanceToNowStrict } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { useNavigation } from "@react-navigation/native";
+import { formatDistanceToNowStrict } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
-import { Button } from '@/components/Button';
+import { Button } from "@/components/Button";
 
-import { NotificationType } from '../NotificationsListByDate';
-import * as S from './styles';
+import { NotificationType } from "../NotificationsListByDate";
+import * as S from "./styles";
+import { useDeepLink } from "@/hooks/useDeepLink";
 
 interface INotificationsProps {
   notification: NotificationType;
@@ -16,48 +17,59 @@ interface INotificationsProps {
 
 export function NotificationsRow({ notification }: INotificationsProps) {
   const navigation = useNavigation();
+  const { deepLink } = useDeepLink();
 
   const formatDistanceOptions = {
     locale: {
       ...ptBR,
       formatDistance: (unit: string, count: number) => {
         switch (true) {
-          case unit === 'xDays':
+          case unit === "xDays":
             return `${count}d`;
 
-          case unit === 'xHours':
+          case unit === "xHours":
             return `${count}h`;
 
-          case unit === 'xMinutes':
+          case unit === "xMinutes":
             return `${count}min`;
 
-          case unit === 'xMonths':
+          case unit === "xMonths":
             return `${count}M`;
 
-          case unit === 'xSeconds':
+          case unit === "xSeconds":
             return `${count}s`;
 
-          case unit === 'xYears':
+          case unit === "xYears":
             return `${count}y`;
         }
 
-        return '%d hours';
+        return "%d hours";
       },
     },
   };
 
   function handlePressNotification() {
+    console.log(notification?.type, "Notification Type");
+
     switch (notification?.type) {
-      case 'like':
-      case 'comment':
-      case 'tagged':
-      case 'tagged_in_comment':
+      case "like":
+      case "comment":
+      case "tagged":
+      case "tagged_in_comment":
         // @ts-expect-error
-        navigation.navigate('Feed', {
-          screen: 'SocialPostDetails',
+        navigation.navigate("Feed", {
+          screen: "SocialPostDetails",
           params: {
             postId: notification?.object_id,
           },
+        });
+        break;
+      case "suggestion":
+        // @ts-expect-error
+
+        console.log(notification?.object_id, "Suggestion");
+        navigation.navigate("Suggestions", {
+          screen: "AllSuggestions",
         });
         break;
       default:
@@ -69,11 +81,11 @@ export function NotificationsRow({ notification }: INotificationsProps) {
 
   function handlePressProfile(profile) {
     // @ts-expect-error
-    navigation.navigate('Feed', {
-      screen: 'AnotherUserProfile',
+    navigation.navigate("Feed", {
+      screen: "AnotherUserProfile",
       params: {
         username: profile,
-        from: 'Feed',
+        from: "Feed",
       },
     });
   }
@@ -87,7 +99,10 @@ export function NotificationsRow({ notification }: INotificationsProps) {
               key={`${notification?.id}_${firstProfile?.username}`}
               onPress={() => handlePressProfile(firstProfile?.username)}
             >
-              <S.UserPhoto source={{ uri: notification?.people[0]?.avatar }} cachePolicy="disk" />
+              <S.UserPhoto
+                source={{ uri: notification?.people[0]?.avatar }}
+                cachePolicy="disk"
+              />
             </S.Clickable>
             <S.TextContainer>
               {notification?.related_profiles?.map((profile, index) => (
@@ -98,7 +113,9 @@ export function NotificationsRow({ notification }: INotificationsProps) {
                   }}
                 >
                   <S.AtNameText>
-                    {index < notification?.related_profiles?.length - 1 ? `${profile},` : profile}
+                    {index < notification?.related_profiles?.length - 1
+                      ? `${profile},`
+                      : profile}
                   </S.AtNameText>
                 </S.Clickable>
               ))}
@@ -117,7 +134,10 @@ export function NotificationsRow({ notification }: INotificationsProps) {
             </S.TextContainer>
             {notification?.image ? (
               <S.Clickable onPress={handlePressNotification}>
-                <S.NotificationPhoto source={{ uri: notification?.image }} cachePolicy="disk" />
+                <S.NotificationPhoto
+                  source={{ uri: notification?.image }}
+                  cachePolicy="disk"
+                />
               </S.Clickable>
             ) : (
               <></>
@@ -127,13 +147,16 @@ export function NotificationsRow({ notification }: INotificationsProps) {
         <S.ContainerButtons>
           {notification?.cta?.length ? (
             notification?.cta?.map((notif) => (
-              <S.ButtonContainer key={notif?.url} isOnlyOne={notification?.cta?.length === 1}>
+              <S.ButtonContainer
+                key={notif?.url}
+                isOnlyOne={notification?.cta?.length === 1}
+              >
                 <Button
                   title={notif?.text}
-                  type={notif?.primary ? 'primary' : 'secondary'}
+                  type={notif?.primary ? "primary" : "secondary"}
                   weight="flat"
                   marginBottom={0}
-                  onPress={async () => await Linking.openURL(notif?.url)}
+                  onPress={() => deepLink(notif?.url)}
                 />
               </S.ButtonContainer>
             ))

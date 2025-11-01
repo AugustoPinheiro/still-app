@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect } from "react";
+import { FlatList } from "react-native";
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { formatDistanceToNowStrict } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { formatDistanceToNowStrict } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
-import { Loading } from '@/components/Loading';
-import { useToast } from '@/contexts/Toast.contexts';
-import { useCloset } from '@/modules/Closet/contexts/closet.contexts';
-import { ClosetLookType } from '@/types/ClosetLookType';
+import { Loading } from "@/components/Loading";
+import { useToast } from "@/contexts/Toast.contexts";
+import { useCloset } from "@/modules/Closet/contexts/closet.contexts";
+import { ClosetLookType } from "@/types/ClosetLookType";
 
-import { deleteClosetLook, putClosetLook } from '../../services/closet.services';
-import * as S from './styles';
+import {
+  deleteClosetLook,
+  putClosetLook,
+} from "../../services/closet.services";
+import * as S from "./styles";
 
 export function AllSuggestions() {
   const { show } = useToast();
@@ -23,26 +26,26 @@ export function AllSuggestions() {
       ...ptBR,
       formatDistance: (unit: string, count: number) => {
         switch (true) {
-          case unit === 'xDays':
-            return `${count} dia${count > 1 ? 's' : ''}`;
+          case unit === "xDays":
+            return `${count} dia${count > 1 ? "s" : ""}`;
 
-          case unit === 'xHours':
-            return `${count} hora${count > 1 ? 's' : ''}`;
+          case unit === "xHours":
+            return `${count} hora${count > 1 ? "s" : ""}`;
 
-          case unit === 'xMinutes':
+          case unit === "xMinutes":
             return `${count} min`;
 
-          case unit === 'xMonths':
-            return `${count} ${count > 1 ? 'meses' : 'mês'}`;
+          case unit === "xMonths":
+            return `${count} ${count > 1 ? "meses" : "mês"}`;
 
-          case unit === 'xSeconds':
+          case unit === "xSeconds":
             return `${count} s`;
 
-          case unit === 'xYears':
-            return `${count} ano${count > 1 ? 's' : ''}`;
+          case unit === "xYears":
+            return `${count} ano${count > 1 ? "s" : ""}`;
         }
 
-        return '%d horas';
+        return "%d horas";
       },
     },
   };
@@ -50,11 +53,12 @@ export function AllSuggestions() {
   const [isLoading, setIsLoading] = React.useState(false);
   let [looksSuggestions, setLooksSuggestions] = React.useState<any[]>();
 
-  const { data, isFetching, hasNextPage, fetchNextPage, refetch } = useInfiniteQuery({
-    queryKey: ['looksSuggestions'],
-    queryFn: fetchClosetLooksSuggestions,
-    getNextPageParam: (lastPage) => lastPage?.meta?.cursor,
-  });
+  const { data, isFetching, hasNextPage, fetchNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["looksSuggestions"],
+      queryFn: fetchClosetLooksSuggestions,
+      getNextPageParam: (lastPage) => lastPage?.meta?.cursor,
+    });
 
   looksSuggestions = React.useMemo(
     () => data?.pages?.flatMap((page: any) => page?.result ?? []) ?? [],
@@ -77,7 +81,7 @@ export function AllSuggestions() {
       setLooksSuggestions(filteredData);
       refetch();
     } catch (error) {
-      show({ type: 'error', message: 'Erro ao salvar o look' });
+      show({ type: "error", message: "Erro ao salvar o look" });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -92,7 +96,7 @@ export function AllSuggestions() {
       setLooksSuggestions(filteredData);
       refetch();
     } catch (error) {
-      show({ type: 'error', message: 'Erro ao salvar o look' });
+      show({ type: "error", message: "Erro ao salvar o look" });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -106,7 +110,9 @@ export function AllSuggestions() {
   if (!isLoading && !isFetching && !looksSuggestions?.length) {
     return (
       <S.ContainerEmpty>
-        <S.EmptyTitle>Você ainda não recebeu nenhuma sugestão de look.</S.EmptyTitle>
+        <S.EmptyTitle>
+          Você ainda não recebeu nenhuma sugestão de look.
+        </S.EmptyTitle>
       </S.ContainerEmpty>
     );
   }
@@ -133,9 +139,9 @@ export function AllSuggestions() {
                   />
                   <S.CardTitle>@{item.made_by?.username}</S.CardTitle>
                   <S.CardTime>
-                    Há{' '}
+                    Há{" "}
                     {formatDistanceToNowStrict(
-                      new Date(item.created_at ? item.created_at : ''),
+                      new Date(item.created_at ? item.created_at : ""),
                       formatDistanceOptions
                     )}
                   </S.CardTime>
@@ -149,10 +155,14 @@ export function AllSuggestions() {
                   cachePolicy="disk"
                 />
               </S.CardImageContainer>
-              <S.floatIconContainer1 onPress={async () => await onDecline(item, index)}>
+              <S.floatIconContainer1
+                onPress={async () => await onDecline(item, index)}
+              >
                 <S.FloatIcon1 name="close" />
               </S.floatIconContainer1>
-              <S.floatIconContainer2 onPress={async () => await onAccept(item, index)}>
+              <S.floatIconContainer2
+                onPress={async () => await onAccept(item, index)}
+              >
                 <S.FloatIcon2 name="check" />
               </S.floatIconContainer2>
             </S.Card>
